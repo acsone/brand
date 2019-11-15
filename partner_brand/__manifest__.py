@@ -18,7 +18,6 @@
     "data": [
         'security/res_brand.xml',
         'views/res_brand.xml',
-        "views/report_template.xml",
     ],
     "installable": True,
     "development_status": "Beta",
