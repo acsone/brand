@@ -36,7 +36,7 @@
 
     <record model="ir.ui.view" id="res_brand_form_view">
         <field name="model">res.brand</field>
-        <field name="inherit_id" ref="partner_brand.res_brand_form_view"/>
+        <field name="inherit_id" ref="brand.res_brand_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('o_address_format')]" position="after">
                 <div colspan="2">
