@@ -15,7 +15,6 @@
         "brand",
     ],
     "data": [
-        "views/report_template.xml",
     ],
     "installable": True,
     "development_status": "Beta",
