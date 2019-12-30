@@ -49,3 +49,14 @@ class AccountInvoice(models.Model):
                 account_id = rec_account
             self.account_id = account_id
         return res
+
+    @api.onchange('brand_id', 'invoice_line_ids')
+    def _onchange_brand_id(self):
+        res = super()._onchange_brand_id()
+        for invoice in self:
+            if invoice.state == 'draft' and invoice.brand_id:
+                account_analytic = invoice.brand_id.analytic_account_id
+                invoice.invoice_line_ids.update(
+                    {'account_analytic_id': account_analytic.id}
+                )
+        return res
