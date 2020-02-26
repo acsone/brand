@@ -25,3 +25,11 @@ class SaleOrder(models.Model):
                 'brand_id': order.brand_id.id,
             })
         return invoice_vals
+
+    @api.onchange('brand_id')
+    def _onchange_brand_id(self):
+        res = super()._onchange_brand_id()
+        for order in self:
+            if order.state == 'draft' and order.brand_id:
+                order.analytic_account_id = order.brand_id.analytic_account_id
+        return res
