@@ -13,6 +13,7 @@ class TestAccountPaymentModeBrand(
         super(TestAccountPaymentModeBrand, self).setUp()
         self.contract = self.env["contract.contract"].create(
             {
+                "name": "contract",
                 "partner_id": self.partner.id,
                 "brand_id": self.brand.id,
                 "contract_type": "sale",

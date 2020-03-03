@@ -12,7 +12,7 @@
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/brand",
     "depends": [
-        "sale_brand",
+        "contract_brand",
         "contract_payment_mode",
         "account_payment_mode_brand",
     ],
