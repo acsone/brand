@@ -2,9 +2,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Sale Payment Mode Brand",
+    "name": "Contract Payment Mode Brand",
     "summary": """
-        This addon limit payment mode selection is sale order to the brand
+        This addon limit payment mode selection is contract to the brand
         allowed payment mode.""",
     "version": "12.0.1.0.0",
     "license": "AGPL-3",
@@ -13,7 +13,7 @@
     "website": "https://github.com/OCA/brand",
     "depends": [
         "sale_brand",
-        "account_payment_sale",
+        "contract_payment_mode",
         "account_payment_mode_brand",
     ],
 }
