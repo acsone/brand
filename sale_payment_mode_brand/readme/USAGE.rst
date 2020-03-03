@@ -4,7 +4,7 @@ To use this module, you need to:
 #. Go to Settings > Users & Companies > Brands
 #. Select a brand
 #. Define allowed payment modes
-#. Create a new invoice
+#. Create a new sale order
     #. Select the brand
     #. Select a payment mode
 
