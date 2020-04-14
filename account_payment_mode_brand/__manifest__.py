@@ -10,6 +10,6 @@
     "author": "ACSONE SA/NV,"
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/brand",
-    "depends": ["account_payment_partner"],
+    "depends": ["brand", "account_payment_partner"],
     "data": ["views/res_brand.xml"],
 }
