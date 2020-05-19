@@ -42,12 +42,14 @@ class TestAccountPaymentModeBrand(
             [],
         )
 
-    def test_contract_onchange_partner(self):
+    def test_contract_onchange_payment_mode_id(self):
         self.contract.on_change_partner_id()
+        self.contract.onchange_payment_mode_id()
         self.assertEqual(self.contract.payment_mode_id, self.payment_mode_1)
         self.brand.allowed_payment_mode_ids = self.payment_mode_2
-        self.contract.on_change_partner_id()
+        self.contract.onchange_payment_mode_id()
         self.assertFalse(self.contract.payment_mode_id)
         self.brand.allowed_payment_mode_ids = False
         self.contract.on_change_partner_id()
+        self.contract.onchange_payment_mode_id()
         self.assertEqual(self.contract.payment_mode_id, self.payment_mode_1)

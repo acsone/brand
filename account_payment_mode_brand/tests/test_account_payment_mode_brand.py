@@ -81,12 +81,14 @@ class TestAccountPaymentModeBrand(TestBasePaymentModeBrand):
             [],
         )
 
-    def test_account_invoice_onchange_partner(self):
+    def test_account_invoice_onchange_payment_mode_id(self):
         self.invoice._onchange_partner_id()
+        self.invoice.onchange_payment_mode_id()
         self.assertEqual(self.invoice.payment_mode_id, self.payment_mode_1)
         self.brand.allowed_payment_mode_ids = self.payment_mode_2
-        self.invoice._onchange_partner_id()
+        self.invoice.onchange_payment_mode_id()
         self.assertFalse(self.invoice.payment_mode_id)
         self.brand.allowed_payment_mode_ids = False
         self.invoice._onchange_partner_id()
+        self.invoice.onchange_payment_mode_id()
         self.assertEqual(self.invoice.payment_mode_id, self.payment_mode_1)
