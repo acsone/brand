@@ -15,6 +15,7 @@
     "depends": [
         'account',
         'brand',
+        'analytic_brand',
     ],
     "data": [
         "views/account_invoice.xml",
