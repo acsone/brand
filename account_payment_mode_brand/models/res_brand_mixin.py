@@ -19,13 +19,3 @@ class ResBrandMixin(models.AbstractModel):
         if self.brand_id and self.allowed_payment_mode_ids:
             domain = [("id", "in", self.allowed_payment_mode_ids.ids)]
         return {"domain": {"payment_mode_id": domain}}
-
-    @api.onchange("payment_mode_id")
-    def onchange_payment_mode_id(self):
-        if (
-                self.payment_mode_id
-                and self.allowed_payment_mode_ids
-                and self.payment_mode_id
-                not in self.allowed_payment_mode_ids
-        ):
-            self.payment_mode_id = False
