@@ -37,3 +37,17 @@ class TestContract(TestContractBase):
         invoice = self.contract.recurring_create_invoice()
         self.assertEqual(invoice.brand_id, self.brand_id)
         self.assertEqual(invoice.account_id, self.account_receivable_brand_default)
+
+    def test_contract_analytic_account_onchange_brand(self):
+        self.brand_id.analytic_account_id = self.env[
+            'account.analytic.account'
+        ].create({'name': 'analytic account'})
+        self.contract.brand_id = self.brand_id
+        self.assertFalse(
+            self.contract.contract_line_ids.mapped('analytic_account_id')
+        )
+        self.contract._onchange_brand_id()
+        self.assertEqual(
+            self.contract.contract_line_ids.mapped('analytic_account_id'),
+            self.brand_id.analytic_account_id,
+        )

@@ -19,3 +19,14 @@ class ContractContract(models.Model):
         if 'account_id' in values:
             values.pop('account_id')
         return values
+
+    @api.onchange('brand_id', 'contract_line_ids')
+    def _onchange_brand_id(self):
+        res = super()._onchange_brand_id()
+        for contract in self:
+            if contract.brand_id:
+                analytic_account = contract.brand_id.analytic_account_id
+                contract.contract_line_ids.update(
+                    {'analytic_account_id': analytic_account.id}
+                )
+        return res
