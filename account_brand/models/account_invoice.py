@@ -79,3 +79,13 @@ class AccountInvoice(models.Model):
             lambda l: l.type in ('out_invoice', 'out_refund')
         )
         return super(AccountInvoice, out_invoices)._check_brand_requirement()
+
+    @api.model
+    def _prepare_refund(self, invoice, date_invoice=None, date=None,
+                        description=None, journal_id=None):
+        values = super(AccountInvoice, self)._prepare_refund(
+            invoice, date_invoice=date_invoice, date=date,
+            description=description, journal_id=journal_id)
+        if invoice.brand_id:
+            values['brand_id'] = invoice.brand_id.id
+        return values
