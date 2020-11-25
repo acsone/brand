@@ -40,3 +40,10 @@ class SaleOrder(models.Model):
     @api.onchange('team_id')
     def _onchange_team_id(self):
         self.brand_id = self.team_id.brand_id
+
+    @api.multi
+    def _finalize_invoices(self, invoices, references):
+        res = super()._finalize_invoices(invoices, references)
+        for invoice in invoices.values():
+            invoice._onchange_partner_brand()
+        return res
