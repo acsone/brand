@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2009 NetAndCo (<http://www.netandco.net>).
 # Copyright 2011 Akretion Benoît Guillot <benoit.guillot@akretion.com>
 # Copyright 2014 prisnet.ch Seraphine Lantible <s.lantible@gmail.com>
@@ -9,7 +10,7 @@
 
 {
     "name": "Product Brand Manager",
-    "version": "14.0.1.0.1",
+    "version": "10.0.1.0.1",
     "development_status": "Mature",
     "category": "Product",
     "summary": "Product Brand Manager",
@@ -22,8 +23,6 @@
     "data": [
         "security/ir.model.access.csv",
         "views/product_brand_view.xml",
-        "reports/sale_report_view.xml",
-        "reports/account_invoice_report_view.xml",
     ],
     "installable": True,
     "auto_install": False,
