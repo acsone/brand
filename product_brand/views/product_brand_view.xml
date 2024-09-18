@@ -13,13 +13,13 @@
     <record id="action_open_brand_products" model="ir.actions.act_window">
         <field name="name">Brand Products</field>
         <field name="res_model">product.template</field>
-        <field name="view_mode">kanban,form,tree</field>
+        <field name="view_mode">kanban,form,list</field>
         <field name="domain">[('product_brand_id', '=', active_id)]</field>
     </record>
     <record id="action_open_single_product_brand" model="ir.actions.act_window">
         <field name="name">Product Brand</field>
         <field name="res_model">product.brand</field>
-        <field name="view_mode">kanban,form,tree</field>
+        <field name="view_mode">kanban,form,list</field>
         <field name="target">current</field>
         <field name="domain">[('product_ids', 'in', active_id)]</field>
     </record>
@@ -65,15 +65,15 @@
             </form>
         </field>
     </record>
-    <record id="view_product_brand_tree" model="ir.ui.view">
-        <field name="name">product.brand.tree</field>
+    <record id="view_product_brand_list" model="ir.ui.view">
+        <field name="name">product.brand.list</field>
         <field name="model">product.brand</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="description" />
                 <field name="partner_id" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_product_brand_kanban" model="ir.ui.view">
@@ -147,7 +147,7 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_kanban_view" />
         <field name="arch" type="xml">
-            <xpath expr="//strong[hasclass('o_kanban_record_title')]" position="after">
+            <xpath expr="//div[hasclass('d-flex')]" position="after">
                 <div>
                     <a
                         t-if="record.product_brand_id"
@@ -165,10 +165,7 @@
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_kanban_view" />
         <field name="arch" type="xml">
-            <xpath
-                expr="//div[hasclass('oe_kanban_details')]//strong[1]"
-                position="after"
-            >
+            <xpath expr="//div[hasclass('d-flex')]" position="after">
                 <div>
                     <a t-if="record.product_brand_id" type="open">
                         <field name="product_brand_id" />
@@ -177,8 +174,8 @@
             </xpath>
         </field>
     </record>
-    <record id="view_product_template_tree_brand" model="ir.ui.view">
-        <field name="name">product tree view: add brand</field>
+    <record id="view_product_template_list_brand" model="ir.ui.view">
+        <field name="name">product list view: add brand</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_tree_view" />
         <field name="arch" type="xml">
@@ -187,8 +184,8 @@
             </field>
         </field>
     </record>
-    <record id="view_product_variant_tree_brand" model="ir.ui.view">
-        <field name="name">product variant tree view: add brand</field>
+    <record id="view_product_variant_list_brand" model="ir.ui.view">
+        <field name="name">product variant list view: add brand</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_product_tree_view" />
         <field name="arch" type="xml">
@@ -200,7 +197,7 @@
     <record model="ir.actions.act_window" id="action_product_brand">
         <field name="name">Brand</field>
         <field name="res_model">product.brand</field>
-        <field name="view_mode">kanban,form,tree</field>
+        <field name="view_mode">kanban,form,list</field>
     </record>
     <menuitem
         name="Product Brands"
