@@ -5,10 +5,11 @@ from odoo.addons.contract.tests.test_contract import TestContractBase
 
 
 class TestContract(TestContractBase):
-    def setUp(self):
-        super().setUp()
-        self.brand_id = self.env["res.brand"].create({"name": "brand"})
-        self.account_receivable_type = self.env.ref(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.brand_id = cls.env["res.brand"].create({"name": "brand"})
+        cls.account_receivable_type = cls.env.ref(
             "account.data_account_type_receivable"
         )
 

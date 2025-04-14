@@ -17,10 +17,9 @@ class ContractContract(models.Model):
     @api.onchange("brand_id", "contract_line_ids")
     def _onchange_brand_id(self):
         res = super()._onchange_brand_id()
-        for contract in self:
-            if contract.brand_id:
-                analytic_account = contract.brand_id.analytic_account_id
-                contract.contract_line_ids.update(
-                    {"analytic_account_id": analytic_account.id}
-                )
+        for contract in self.filtered("brand_id"):
+            analytic_account = contract.brand_id.analytic_account_id
+            contract.contract_line_ids.update(
+                {"analytic_account_id": analytic_account.id}
+            )
         return res
