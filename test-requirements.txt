@@ -1,0 +1,2 @@
+odoo-addon-analytic-brand @ git+https://github.com/OCA/brand.git@refs/pull/244/head#subdirectory=analytic_brand
+odoo-addon-contract @ git+https://github.com/OCA/contract.git@refs/pull/1136/head#subdirectory=contract
