@@ -8,16 +8,17 @@ from odoo.addons.contract.tests.test_contract import TestContractBase
 
 
 class TestContract(TestContractBase):
+    @classmethod
     @mute_logger("odoo.addons.queue_job.models.base")
-    def setUp(self):
-        super().setUp()
-        self.brand_id = self.env["res.brand"].create({"name": "brand"})
-        self.line_vals["date_start"] = Date.today()
-        self.line_vals["recurring_next_date"] = Date.today()
-        self.acct_line = (
-            self.env["contract.line"]
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.brand_id = cls.env["res.brand"].create({"name": "brand"})
+        cls.line_vals["date_start"] = Date.today()
+        cls.line_vals["recurring_next_date"] = Date.today()
+        cls.acct_line = (
+            cls.env["contract.line"]
             .with_context(test_queue_job_no_delay=True)
-            .create(self.line_vals)
+            .create(cls.line_vals)
         )
 
     @mute_logger("odoo.addons.queue_job.models.base")
