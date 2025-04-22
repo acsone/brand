@@ -1,0 +1,5 @@
+odoo-addon-contract-brand @ git+https://github.com/OCA/brand.git@refs/pull/243/head#subdirectory=contract_brand
+odoo-addon-contract-forecast @ git+https://github.com/OCA/contract.git@refs/pull/1225/head#subdirectory=contract_forecast
+odoo-addon-analytic-brand @ git+https://github.com/OCA/brand.git@refs/pull/244/head#subdirectory=analytic_brand
+odoo-addon-contract @ git+https://github.com/OCA/contract.git@refs/pull/1136/head#subdirectory=contract
+odoo-addon-contract-line-successor @ git+https://github.com/OCA/contract.git@refs/pull/1136/head#subdirectory=contract_line_successor
