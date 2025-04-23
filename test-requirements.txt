@@ -1,0 +1,2 @@
+odoo-addon-account-payment-mode-brand @ git+https://github.com/OCA/brand.git@refs/pull/251/head#subdirectory=account_payment_mode_brand
+odoo-addon-brand @ git+https://github.com/OCA/brand.git@refs/pull/250/head#subdirectory=brand
