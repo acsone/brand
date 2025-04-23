@@ -1,0 +1,7 @@
+odoo-addon-brand @ git+https://github.com/OCA/brand.git@refs/pull/250/head#subdirectory=brand
+odoo-addon-contract-brand @ git+https://github.com/OCA/brand.git@refs/pull/243/head#subdirectory=contract_brand
+odoo-addon-product-contract @ git+https://github.com/OCA/contract.git@refs/pull/1137/head#subdirectory=product_contract
+odoo-addon-analytic-brand @ git+https://github.com/OCA/brand.git@refs/pull/244/head#subdirectory=analytic_brand
+odoo-addon-contract @ git+https://github.com/OCA/contract.git@refs/pull/1136/head#subdirectory=contract
+odoo-addon-contract-termination @ git+https://github.com/OCA/contract.git@refs/pull/1136/head#subdirectory=contract_termination
+odoo-addon-contract-line-successor @ git+https://github.com/OCA/contract.git@refs/pull/1136/head#subdirectory=contract_line_successor
