@@ -13,7 +13,13 @@ class AccountMove(models.Model):
 
     def _is_brand_required(self):
         self.ensure_one()
-        if self.move_type in ("in_invoice", "in_refund"):
+        if self.move_type in (
+            "in_invoice",
+            "in_refund",
+            "entry",
+            "out_receipt",
+            "in_receipt",
+        ):
             return False
         return super()._is_brand_required()
 
