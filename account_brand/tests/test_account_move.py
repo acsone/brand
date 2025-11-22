@@ -108,3 +108,34 @@ class TestAccountMove(TransactionCase):
             account,
             self.account_receivable_partner_brand_default,
         )
+
+    def test_add_new_line(self):
+        self.env["res.partner.account.brand"].create(
+            {
+                "partner_id": False,
+                "account_id": self.account_receivable_brand_default.id,
+                "brand_id": self.brand_id.id,
+                "account_type": "asset_receivable",
+            }
+        )
+        self.move.write(
+            {
+                "brand_id": self.brand_id.id,
+                "invoice_line_ids": [
+                    (5, 0, 0),
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product.id,
+                            "quantity": 1,
+                            "price_unit": 42,
+                            "name": "something",
+                            "account_id": self.account_revenue.id,
+                        },
+                    ),
+                ],
+            }
+        )
+        account = self._get_receivable_account(self.move)
+        self.assertEqual(account, self.account_receivable_brand_default)
