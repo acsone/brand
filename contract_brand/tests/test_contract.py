@@ -18,6 +18,15 @@ class TestContract(TestContractBase):
                 "plan_id": cls.analytic_plan.id,
             }
         )
+        cls.analytic_plan2 = cls.env["account.analytic.plan"].create(
+            {"name": "analytic plan 2"}
+        )
+        cls.analytic_account2 = cls.env["account.analytic.account"].create(
+            {
+                "name": "analytic account 2",
+                "plan_id": cls.analytic_plan2.id,
+            }
+        )
 
     def test_contract_create_branded_move(self):
         """It should create a branded move based on the contract brand"""
@@ -26,6 +35,9 @@ class TestContract(TestContractBase):
         self.assertEqual(move.brand_id, self.brand_id)
 
     def test_contract_analytic_account_onchange_brand(self):
+        """
+        No analytic distribution model -> the only analytic is the one of the brand
+        """
         self.brand_id.analytic_distribution = {self.analytic_account.id: 100.0}
         self.assertFalse(
             any(self.contract.contract_line_ids.mapped("analytic_distribution"))
@@ -35,3 +47,27 @@ class TestContract(TestContractBase):
             self.assertEqual(
                 line.analytic_distribution, self.brand_id.analytic_distribution
             )
+
+    def test_contract_analytic_distribution_combined(self):
+        """
+        Analytic distribution model for the product + analytic on the brand
+        -> Combine both
+        """
+        contract_line = self.contract.contract_line_ids[0]
+        product = contract_line.product_id
+        self.env["account.analytic.distribution.model"].create(
+            {
+                "product_id": product.id,
+                "analytic_distribution": {str(self.analytic_account.id): 100},
+            }
+        )
+        contract_line._compute_analytic_distribution()
+        self.assertEqual(
+            contract_line.analytic_distribution, {str(self.analytic_account.id): 100}
+        )
+        self.brand_id.analytic_distribution = {str(self.analytic_account2.id): 100}
+        self.contract.brand_id = self.brand_id
+        self.assertEqual(
+            contract_line.analytic_distribution,
+            {str(self.analytic_account.id): 100, str(self.analytic_account2.id): 100},
+        )
