@@ -1,7 +1,6 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 from odoo.tools import float_compare
@@ -15,11 +14,26 @@ class TestProductPricelist(TransactionCase):
         cls.product_brand = cls.env["product.brand"].create(
             {"name": "Test Brand", "description": "Test brand description"}
         )
-        cls.product = cls.env.ref("product.product_product_4")
-        cls.product.write({"product_brand_id": cls.product_brand.id})
-        cls.product_2 = cls.env.ref("product.product_product_5")
+        cls.product_categ = cls.env["product.category"].create(
+            {"name": "Test Category"}
+        )
+        cls.product = cls.env["product.product"].create(
+            {
+                "name": "Test Product 1",
+                "lst_price": 100.0,
+                "product_brand_id": cls.product_brand.id,
+                "categ_id": cls.product_categ.id,
+            }
+        )
+        cls.product_2 = cls.env["product.product"].create(
+            {
+                "name": "Test Product 2",
+                "lst_price": 200.0,
+                "categ_id": cls.product_categ.id,
+            }
+        )
 
-        cls.list0 = cls.env.ref("product.list0")
+        cls.list0 = cls.env["product.pricelist"].create({"name": "Public Pricelist"})
         cls.pricelist = cls.env["product.pricelist"].create(
             {
                 "name": "Test Pricelist",
@@ -49,7 +63,6 @@ class TestProductPricelist(TransactionCase):
                 ],
             }
         )
-        cls.product_categ = cls.env.ref("product.product_category_2")
 
     def test_ensure_pricelist_item_consistency(self):
         with self.assertRaises(ValidationError):
@@ -71,9 +84,10 @@ class TestProductPricelist(TransactionCase):
             }
         )
         pricelist_item.write({"product_brand_id": self.product_brand.id})
-        pricelist_item._compute_name_and_price()
+        pricelist_item._compute_name()
         self.assertEqual(
-            pricelist_item.name, _("Brand: %s") % (self.product_brand.display_name)
+            pricelist_item.name,
+            self.env._("Brand: %s", self.product_brand.display_name),
         )
         pricelist_item_2 = self.env["product.pricelist.item"].create(
             {
